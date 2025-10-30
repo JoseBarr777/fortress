@@ -8,7 +8,7 @@ import authRoutes from '#routes/auth.routes.js';
 
 const app = express();
 
-// Middleware
+// Middleware added
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
