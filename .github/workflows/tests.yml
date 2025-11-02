@@ -1,0 +1,84 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  pull_request:
+    branches:
+      - main
+      - staging
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Run tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        id: test
+        env:
+          NODE_ENV: test
+          NODE_OPTIONS: --experimental-vm-modules
+          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgres://test:test@localhost:5432/test' }}
+        run: |
+          echo "Running tests..."
+          npm test -- --coverage --coverageReporters=json-summary --coverageReporters=text --coverageReporters=lcov
+        continue-on-error: true
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage/
+          retention-days: 30
+
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f coverage/coverage-summary.json ]; then
+            echo "### Coverage Summary" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            cat coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Coverage reports not found or tests failed to run." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ steps.test.outcome }}" == "success" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✅ All tests passed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "❌ Some tests failed. Please review the test output above." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Annotate test failures
+        if: steps.test.outcome == 'failure'
+        run: |
+          echo "::error::Tests failed. Please review the test output and fix the failing tests."
+          exit 1
+
+      - name: Fail workflow if tests failed
+        if: steps.test.outcome == 'failure'
+        run: |
+          echo "::error::Test suite failed. Please fix the failing tests and try again."
+          exit 1
