@@ -1,2 +1,10 @@
 node_modules/
 .env
+# .env.*
+
+Acquisition/
+logs/.neon_local/
+
+DOCKER_SETUP.md
+
+logs
