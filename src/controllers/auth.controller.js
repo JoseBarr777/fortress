@@ -4,6 +4,7 @@ import { formatValidationError } from '#utils/format.js';
 import { createUser, authenticateUser } from '#services/auth.service.js';
 import { jwttoken } from '#utils/jwt.js';
 import { cookies } from '#utils/cookies.js';
+import { AppError } from '#errors/AppError.js';
 
 export const signup = async (req, res, next) => {
   try {
@@ -18,7 +19,6 @@ export const signup = async (req, res, next) => {
 
     const { name, email, password, role } = validationResult.data;
 
-    // AUTH SERVICE
     const user = await createUser({ name, email, password, role });
 
     const token = jwttoken.sign({ id: user.id, email: user.email, role: user.role });
@@ -36,12 +36,10 @@ export const signup = async (req, res, next) => {
     });
   } catch (e) {
     logger.error('Signup error', e);
-
-    if (e.message === 'User with this email already exists') {
-      return res.status(409).json({ message: 'Email already exist' });
+    if (e instanceof AppError) {
+      return res.status(e.statusCode).json({ message: e.message });
     }
-
-    next(e); // acts like middleware
+    next(e);
   }
 };
 
@@ -75,15 +73,9 @@ export const signin = async (req, res, next) => {
     });
   } catch (e) {
     logger.error('Signin error', e);
-
-    if (e.message === 'User not found') {
-      return res.status(404).json({ message: 'User not found' });
+    if (e instanceof AppError) {
+      return res.status(e.statusCode).json({ message: e.message });
     }
-
-    if (e.message === 'Invalid credentials') {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
     next(e);
   }
 };

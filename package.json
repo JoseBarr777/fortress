@@ -10,7 +10,9 @@
     "#routes/*": "./src/routes/*",
     "#services/*": "./src/services/*",
     "#utils/*": "./src/utils/*",
-    "#validations/*": "./src/validations/*"
+    "#validations/*": "./src/validations/*",
+    "#errors/*": "./src/errors/*",
+    "#policies/*": "./src/policies/*"
   },
   "scripts": {
     "dev": "node --watch src/index.js",

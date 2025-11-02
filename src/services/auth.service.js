@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import db from '#config/database.js';
 import { eq } from 'drizzle-orm';
 import { users } from '#models/user.model.js';
+import { NotFoundError, UnauthorizedError, ConflictError } from '#errors/AppError.js';
 
 export const hashPassword = async (password) => {
   try {
@@ -31,14 +32,14 @@ export const authenticateUser = async ({ email, password }) => {
       .limit(1);
 
     if (!rows || rows.length === 0) {
-      throw new Error('User not found');
+      throw new NotFoundError('User not found');
     }
 
     const user = rows[0];
     const isValid = await comparePassword(password, user.password);
 
     if (!isValid) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedError('Invalid credentials');
     }
 
     // Return user without password
@@ -59,14 +60,14 @@ export const authenticateUser = async ({ email, password }) => {
 
 export const createUser = async ({ name, email, password, role }) => {
   try {
-    const existingUser = db
+    const existingUser = await db
       .select()
       .from(users)
       .where(eq(users.email, email))
       .limit(1);
 
     if (existingUser.length > 0) {
-      throw new Error('User with this email already exists');
+      throw new ConflictError('User with this email already exists');
     }
 
     const password_hash = await hashPassword(password);
