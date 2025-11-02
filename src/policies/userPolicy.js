@@ -2,7 +2,9 @@ import { UnauthorizedError, ForbiddenError } from '#errors/AppError.js';
 
 export const canUpdateUser = (currentUser, targetUserId, updates) => {
   if (!currentUser) {
-    throw new UnauthorizedError('You must be logged in to update user information');
+    throw new UnauthorizedError(
+      'You must be logged in to update user information'
+    );
   }
 
   const isAdmin = currentUser.role === 'admin';

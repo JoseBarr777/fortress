@@ -3,7 +3,11 @@ import { db } from '#config/database.js';
 import { users } from '#models/user.model.js';
 import { eq } from 'drizzle-orm';
 import { NotFoundError, ConflictError } from '#errors/AppError.js';
-import { canUpdateUser, canDeleteUser, sanitizeUserUpdates } from '#policies/userPolicy.js';
+import {
+  canUpdateUser,
+  canDeleteUser,
+  sanitizeUserUpdates,
+} from '#policies/userPolicy.js';
 
 export const getAllUsers = async () => {
   try {
@@ -61,7 +65,10 @@ export const updateUser = async (currentUser, id, updates) => {
     const sanitizedUpdates = sanitizeUserUpdates(currentUser, updates);
 
     // Check if email is being updated and if it already exists
-    if (sanitizedUpdates.email && sanitizedUpdates.email !== existingUser.email) {
+    if (
+      sanitizedUpdates.email &&
+      sanitizedUpdates.email !== existingUser.email
+    ) {
       const [emailExists] = await db
         .select()
         .from(users)

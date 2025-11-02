@@ -3,9 +3,13 @@ import bcrypt from 'bcrypt';
 import db from '#config/database.js';
 import { eq } from 'drizzle-orm';
 import { users } from '#models/user.model.js';
-import { NotFoundError, UnauthorizedError, ConflictError } from '#errors/AppError.js';
+import {
+  NotFoundError,
+  UnauthorizedError,
+  ConflictError,
+} from '#errors/AppError.js';
 
-export const hashPassword = async (password) => {
+export const hashPassword = async password => {
   try {
     return await bcrypt.hash(password, 10);
   } catch (e) {
