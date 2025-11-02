@@ -42,12 +42,10 @@ const securityMiddleware = async (req, res, next) => {
         userAgent: req.get('User-Agent'),
         path: req.path,
       });
-      return res
-        .status(403)
-        .json({
-          error: 'Forbidden',
-          message: 'Automated requests are not allowed.',
-        });
+      return res.status(403).json({
+        error: 'Forbidden',
+        message: 'Automated requests are not allowed.',
+      });
     }
     // If shield
     if (decision.isDenied() && decision.reason.isShield()) {
@@ -56,12 +54,10 @@ const securityMiddleware = async (req, res, next) => {
         userAgent: req.get('User-Agent'),
         path: req.path,
       });
-      return res
-        .status(403)
-        .json({
-          error: 'Forbidden',
-          message: 'Requests blocked by security policy',
-        });
+      return res.status(403).json({
+        error: 'Forbidden',
+        message: 'Requests blocked by security policy',
+      });
     }
     // If rate limit exceeded
     if (decision.isDenied() && decision.reason.isRateLimit()) {
@@ -76,12 +72,10 @@ const securityMiddleware = async (req, res, next) => {
     next(); // Proceed to next middleware or route handler
   } catch (e) {
     console.log('Arcject middleware error:', e);
-    res
-      .status(500)
-      .send({
-        error: 'Internal Server Error',
-        message: 'Something went wrong with security middleware',
-      });
+    res.status(500).send({
+      error: 'Internal Server Error',
+      message: 'Something went wrong with security middleware',
+    });
   }
 };
 

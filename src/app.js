@@ -24,13 +24,11 @@ app.use(
 
 // Health Check Endpoint (before security middleware to avoid bot detection issues)
 app.get('/health', (req, res) => {
-  res
-    .status(200)
-    .json({
-      status: 'OK',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-    });
+  res.status(200).json({
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+  });
 });
 
 // Apply security middleware to all routes except health check
