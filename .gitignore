@@ -1,6 +1,6 @@
 node_modules/
 .env
-# .env.*
+.env.*
 
 Acquisition/
 .neon_local/
@@ -9,4 +9,5 @@ logs/.neon_local/
 DOCKER_SETUP.md
 
 logs/
+coverage/
 
