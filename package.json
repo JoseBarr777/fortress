@@ -12,7 +12,8 @@
     "#utils/*": "./src/utils/*",
     "#validations/*": "./src/validations/*",
     "#errors/*": "./src/errors/*",
-    "#policies/*": "./src/policies/*"
+    "#policies/*": "./src/policies/*",
+    "#src/*": "./src/*"
   },
   "scripts": {
     "dev": "node --watch src/index.js",
@@ -25,7 +26,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "docker:dev": "sh scripts/dev.sh",
-    "docker:prod": "sh scripts/prod.sh"
+    "docker:prod": "sh scripts/prod.sh",
+    "test": "ARCJET_ENV=development NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
@@ -63,6 +65,8 @@
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2"
+    "jest": "^30.2.0",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4"
   }
 }

@@ -42,4 +42,9 @@ app.use('/api/auth', authRoutes);
 // User Routes
 app.use('/api/users', usersRoutes);
 
+// Catch-all for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
 export default app;
