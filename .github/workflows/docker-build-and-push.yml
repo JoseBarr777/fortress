@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/acquisition
+          images: ${{ secrets.DOCKER_USERNAME }}/fortress
           tags: |
             type=ref,event=branch
             type=sha,prefix={{branch}}-
@@ -45,8 +45,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: production
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/acquisition:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/acquisition:buildcache,mode=max
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/fortress:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/fortress:buildcache,mode=max
 
       - name: Generate Docker summary
         if: always()
@@ -55,7 +55,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Published Image" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Image Name:** \`${{ secrets.DOCKER_USERNAME }}/acquisition\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Image Name:** \`${{ secrets.DOCKER_USERNAME }}/fortress\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Tags" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY

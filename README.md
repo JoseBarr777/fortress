@@ -1,6 +1,6 @@
-# Acquisition
+# Fortress
 
-A secure REST API built with Node.js and Express, featuring user authentication, authorization, and comprehensive security measures.
+A secure warehouse inventory management system built with Node.js and Express, featuring user authentication, authorization, and comprehensive security measures. (Work in Progress)
 
 ## Features
 
@@ -37,8 +37,8 @@ A secure REST API built with Node.js and Express, featuring user authentication,
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/JoseBarr777/acquisition.git
-cd acquisition
+git clone https://github.com/JoseBarr777/fortress.git
+cd fortress
 ```
 
 ### 2. Install dependencies
@@ -148,7 +148,7 @@ Tests include:
 ## Project Structure
 
 ```
-acquisition/
+fortress/
 ├── src/
 │   ├── config/         # Configuration files (database, logger, arcjet)
 │   ├── controllers/    # Request handlers
@@ -179,3 +179,28 @@ The project includes GitHub Actions workflows for:
 ## License
 
 MIT
+
+## Acknowledgments
+
+This project was built as a hands-on DevOps learning experience, following the tutorial [DevOps from Zero to Hero: Build and Deploy a Production API](https://www.youtube.com/watch?v=H5FAxTBuNM8&t=364s). The tutorial provided the foundation for implementing production-ready DevOps practices:
+
+### DevOps Practices Implemented:
+- **Docker Containerization** - Multi-stage Dockerfile optimized for development and production
+- **Container Orchestration** - Docker Compose configurations for both environments
+- **CI/CD Pipeline** - GitHub Actions workflows for automated testing, linting, and Docker image deployment
+- **Infrastructure as Code** - Automated deployment scripts with health checks and database migrations
+- **Production Security** - Helmet, CORS, Arcjet integration for bot detection and rate limiting
+- **Observability** - Structured logging with Winston, comprehensive error handling
+- **Database Management** - Drizzle ORM with automated migrations, Neon serverless PostgreSQL
+- **Testing Infrastructure** - Jest and Supertest integration with CI pipeline
+- **Code Quality** - ESLint, Prettier with automated checks in CI/CD
+
+### Planned Extensions:
+Building this into a complete **warehouse inventory management system** to demonstrate end-to-end application development and deployment:
+- Multi-warehouse support with location tracking
+- Product/SKU management system
+- Real-time stock movement tracking and auditing
+- Low-stock alerts and reporting dashboard
+- RESTful API architecture with comprehensive validation
+
+This project demonstrates the ability to implement enterprise-grade DevOps practices and extend a base application into a production-ready system.

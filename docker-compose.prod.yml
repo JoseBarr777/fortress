@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: production
-    container_name: acquisitions-app-prod
+    container_name: fortress-app-prod
     ports:
       - '${PORT:-3000}:3000'
     env_file:
@@ -37,8 +37,8 @@ services:
       retries: 3
       start_period: 40s
     networks:
-      - acquisitions-prod
+      - fortress-prod
 
 networks:
-  acquisitions-prod:
+  fortress-prod:
     driver: bridge

@@ -1,5 +1,5 @@
 {
-  "name": "acquisition",
+  "name": "fortress",
   "version": "1.0.0",
   "main": "index.js",
   "imports": {
@@ -31,15 +31,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoseBarr777/acquisition.git"
+    "url": "git+https://github.com/JoseBarr777/fortress.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JoseBarr777/acquisition/issues"
+    "url": "https://github.com/JoseBarr777/fortress/issues"
   },
-  "homepage": "https://github.com/JoseBarr777/acquisition#readme",
+  "homepage": "https://github.com/JoseBarr777/fortress#readme",
   "description": "",
   "type": "module",
   "dependencies": {

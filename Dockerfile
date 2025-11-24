@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile for Node.js acquisitions application
+# Multi-stage Dockerfile for Node.js Fortress application
 
 # Base image with Node.js 20 (required for @neondatabase/serverless)
 FROM node:20-alpine AS base

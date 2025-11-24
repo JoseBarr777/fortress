@@ -4,7 +4,7 @@ services:
   # Neon Local proxy for development
   neon-local:
     image: neondatabase/neon_local:latest
-    container_name: acquisitions-neon-local
+    container_name: fortress-neon-local
     ports:
       - '5432:5432'
     env_file:
@@ -20,7 +20,7 @@ services:
       retries: 5
       start_period: 10s
     networks:
-      - acquisitions-dev
+      - fortress-dev
 
   # Node.js application
   app:
@@ -28,7 +28,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
-    container_name: acquisitions-app-dev
+    container_name: fortress-app-dev
     ports:
       - '${PORT:-3000}:3000'
     env_file:
@@ -43,9 +43,9 @@ services:
       neon-local:
         condition: service_healthy
     networks:
-      - acquisitions-dev
+      - fortress-dev
     restart: unless-stopped
 
 networks:
-  acquisitions-dev:
+  fortress-dev:
     driver: bridge

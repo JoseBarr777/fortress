@@ -36,13 +36,13 @@ app.use(securityMiddleware);
 
 // Root Endpoint
 app.get('/', (req, res) => {
-  logger.info('Hello from Acquisition!');
-  res.status(200).send('Hello from Acquisition!');
+  logger.info('Hello from Fortress!');
+  res.status(200).send('Hello from Fortress!');
 });
 
 // API Base Endpoint
 app.get('/api', (req, res) => {
-  res.status(200).json({ message: 'Acquisition API is running!' });
+  res.status(200).json({ message: 'Fortress API is running!' });
 });
 
 // Auth Routes

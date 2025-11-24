@@ -24,7 +24,7 @@ describe('API Endpoints', () => {
 
       expect(response.body).toHaveProperty(
         'message',
-        'Acquisition API is running!'
+        'Fortress API is running!'
       );
     });
   });

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Production deployment script for Acquisition App
+# Production deployment script for Fortress App
 # This script starts the application in production mode with Neon Cloud Database
 
-echo "🚀 Starting Acquisition App in Production Mode"
+echo "🚀 Starting Fortress App in Production Mode"
 echo "==============================================="
 
 # Check if .env.production exists
