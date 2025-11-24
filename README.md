@@ -185,6 +185,7 @@ MIT
 This project was built as a hands-on DevOps learning experience, following the tutorial [DevOps from Zero to Hero: Build and Deploy a Production API](https://www.youtube.com/watch?v=H5FAxTBuNM8&t=364s). The tutorial provided the foundation for implementing production-ready DevOps practices:
 
 ### DevOps Practices Implemented:
+
 - **Docker Containerization** - Multi-stage Dockerfile optimized for development and production
 - **Container Orchestration** - Docker Compose configurations for both environments
 - **CI/CD Pipeline** - GitHub Actions workflows for automated testing, linting, and Docker image deployment
@@ -196,7 +197,9 @@ This project was built as a hands-on DevOps learning experience, following the t
 - **Code Quality** - ESLint, Prettier with automated checks in CI/CD
 
 ### Planned Extensions:
+
 Building this into a complete **warehouse inventory management system** to demonstrate end-to-end application development and deployment:
+
 - Multi-warehouse support with location tracking
 - Product/SKU management system
 - Real-time stock movement tracking and auditing
